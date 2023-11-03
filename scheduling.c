@@ -31,6 +31,7 @@ static void taskAFunction(){
   printf("Hello from task A!\n");
   while(1);
 }
+
 static void taskBFunction(){
   printf("Hello from task B!\n");
   while(1); 

@@ -1,0 +1,6 @@
+/mnt/c/Users/navta/documents/orbital/RTOS-Workshop/build/CMakeFiles/workshop.dir
+/mnt/c/Users/navta/documents/orbital/RTOS-Workshop/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/navta/documents/orbital/RTOS-Workshop/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/navta/documents/orbital/RTOS-Workshop/build/freertos/CMakeFiles/FreeRTOS.dir
+/mnt/c/Users/navta/documents/orbital/RTOS-Workshop/build/freertos/CMakeFiles/edit_cache.dir
+/mnt/c/Users/navta/documents/orbital/RTOS-Workshop/build/freertos/CMakeFiles/rebuild_cache.dir

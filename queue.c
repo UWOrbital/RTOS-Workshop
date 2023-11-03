@@ -52,7 +52,7 @@ int main() {
   
   /* USER CODE START */
 
-  // Create the queue
+  taskBQueueHandle = xQueueCreateStatic(TASK_B_QUEUE_LENGTH, TASK_B_QUEUE_ITEM_SIZE, taskBQueueStack, &taskBQueue);
 
   /* USER CODE END */
 
@@ -70,16 +70,17 @@ void taskAFunction(){
     }
     else if (strcmp(inputString, "PRINT") == 0) {
       eventToSend = PRINT;
+
     }
     else if(strcmp(inputString, "HELLO") == 0){
       eventToSend = HELLO;
+
     } else {
       continue;
     }
-
     /* USER CODE START */
 
-    // send the event to the queue to send to task B
+    xQueueSend(taskBQueueHandle, &eventToSend, portMAX_DELAY);
 
     /* USER CODE END */
 
@@ -90,11 +91,23 @@ void taskBFunction(){
   uint32_t counter = 0;
   while(1){
     /* USER CODE START */
-
-    // receive a command_line_event_t from the queue
-    // if INCREMENT, increment the counter
-    // if PRINT then print the counter value
-    // if HELLO, reply by printing Hello!
+    command_line_event_t event;
+    if(xQueueReceive(taskBQueueHandle, &event, portMAX_DELAY) != pdPASS){
+      continue;
+    }
+    switch (event) {
+      case INCREMENT:
+        counter++;
+        break;
+      case PRINT:
+        printf("Current value of counter is: %u\n", counter);
+        break;
+      case HELLO:
+        printf("Hello!\n");
+        break;
+      default:
+        printf("Error: invalid command\n");
+    }
   
     /* USER CODE END */
   }
