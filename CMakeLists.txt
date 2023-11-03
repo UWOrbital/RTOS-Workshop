@@ -21,24 +21,34 @@
 # find_package(Threads REQUIRED)
 cmake_minimum_required(VERSION 3.15)
 
+enable_language(C CXX)
+
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/toolchain_gcc.cmake)
 
 project(workshop)
 
 if(CMAKE_BUILD_TYPE MATCHES SCHEDULING)
-    enable_language(C CXX)
-
     set(SOURCES
         scheduling.c
     )
-
-    add_executable(workshop ${SOURCES})
-
-    target_include_directories(workshop PRIVATE
+elseif(CMAKE_BUILD_TYPE MATCHES MUTEX)
+    set(SOURCES
+        mutex.c
+    )
+elseif(CMAKE_BUILD_TYPE MATCHES QUEUE)
+    set(SOURCES
+        queue.c
     )
 else()
     message(FATAL_ERROR "Unknown build type: ${CMAKE_BUILD_TYPE}")
 endif()
+
+add_executable(workshop ${SOURCES})
+
+target_compile_options(workshop PRIVATE -O0)
+
+target_include_directories(workshop PRIVATE
+)
 
 add_subdirectory(freertos)
 target_link_libraries(workshop PRIVATE
